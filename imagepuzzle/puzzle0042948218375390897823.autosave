@@ -1,0 +1,47 @@
+import os, random
+path = os.getcwd()
+
+class Tile:
+    def __init__(self,r,c,v):
+        self.r=r
+        self.c=c
+        self.v=v
+        self.img=loadImage(path+"/images/"+str(v)+".png")
+        
+    def display(self):
+        image(self.img,self.c*200,self.r*200)
+        stroke(0)
+        rect(self.c*200,self.r*200,200,200)
+
+class Puzzle:
+    def __init__(self):
+        self.numRows=4
+        self.numCols=4
+        self.tiles=[]
+        cnt=0
+        for r in range(self.numRows):
+            for c in range(self.numCols):
+                self.tiles.append(Tile(r,c,cnt))
+                cnt+=1
+                
+    def display(self):
+        for t in self.tiles:
+            t.display()
+            
+        c = mouseX // 200
+        r = mouseY // 200
+        print (r,c)
+        stroke(0,255,0)
+        rect(c*200,r*200,200,200)
+ 
+def setup():
+    size(800,800)
+    background(0)
+    noFill()
+    strokeWeight(5)
+
+p = Puzzle()
+
+def draw():
+    background(0)
+    p.display()
